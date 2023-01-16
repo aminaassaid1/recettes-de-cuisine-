@@ -46,12 +46,31 @@ document.querySelector('#search-btn').addEventListener('click',()=>{
                         CardTitle.append(element.strMeal);
                         let button = document.createElement("button");
                         button.setAttribute("class","btn btn-primary");
+                        button.setAttribute("data-target","modalRe")
                         let show = document.createTextNode("Read More");
                         button.appendChild(show);
                         CardBody.append(CardTitle,button);
                         card.append(CardBody);
                         document.querySelector('#cards').append(card)
                 });
+                // modal
+
+                document.querySelector('#btn').addEventListener('click',()=>{
+                        document.querySelector("#modal").innerHTML = data.meals[0].strMeal;
+                        let modalBody = document.querySelector('.modal-body');
+                        modalBody.innerHTML = '';
+                        let img = document.createElement("img");
+                        img.setAttribute("src",element.strMealThumb);
+                        img.setAttribute("class","card-img-top")
+                        modalBody.append(img);
+                        let modalTitle = document.createElement('h5');
+                        modalTitle.setAttribute("class","modal-title");
+                        modalTitle.append(element.strMeal);
+                        modalBody.append(modalTitle);
+                        let instructions =document.createElement('p');
+                        instructions.append(element.strInstructions);
+                        modalBody.append(instructions);
+                })
                         //  pagination 
               
         let pagination = document.createElement("ul");
