@@ -40,58 +40,6 @@ for (let i = 0; i < 6; i++) {
         CardBody.append(CardTitle, button);
         card.append(CardBody);
         document.querySelector('#cards').append(card)
-    })
-}
-
-document.querySelector('#search-btn').addEventListener('click', () => {
-    pagination.innerHTML = ""
-    document.querySelector('#cards').innerHTML = ''
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${document.querySelector('#search').value}`).then((response) => {
-        let searchdata = response.json();
-        return searchdata
-
-    }).then((response) => {
-        response.meals.slice(0, 6).forEach(element => {
-            let card = document.createElement("div");
-            card.setAttribute("class", "card col-md-5 col-lg-3 p-0 m-0")
-            let img = document.createElement("img");
-            img.setAttribute("src", element.strMealThumb);
-            img.setAttribute("class", "card-img-top")
-            card.append(img);
-            let CardBody = document.createElement("div");
-            CardBody.setAttribute("class", "card-body");
-            let CardTitle = document.createElement("h5");
-            CardTitle.setAttribute("class", "card-title");
-            CardTitle.append(element.strMeal);
-            let button = document.createElement("button");
-            button.setAttribute("class", "btn btn-primary");
-            button.setAttribute("data-bs-target", "#modalRe");
-            button.setAttribute("data-bs-toggle", "modal");
-            button.setAttribute("type", "button");
-            let show = document.createTextNode("Read More");
-            button.appendChild(show);
-            button.addEventListener('click', () => {
-                document.querySelector("#modalLabel").innerHTML = element.strMeal;
-                let modalBody = document.querySelector('.modal-body');
-                modalBody.innerHTML = '';
-                let img = document.createElement("img");
-                img.setAttribute("src", element.strMealThumb);
-                img.setAttribute("class", "card-img-top")
-                modalBody.append(img);
-                let modalTitle = document.createElement('h5');
-                modalTitle.setAttribute("class", "modal-title");
-                modalTitle.append(element.strMeal);
-                modalBody.append(modalTitle);
-                let instructions = document.createElement('p');
-                instructions.append(element.strInstructions);
-                modalBody.append(instructions);
-            })
-            CardBody.append(CardTitle, button);
-            card.append(CardBody);
-            document.querySelector('#cards').append(card)
-        });
-        //  pagination
-
         let pagination = document.createElement("ul");
         pagination.setAttribute("class", "pagination");
         for (let i = 0; i < Math.ceil((response.meals.length) / 6); i++) {
@@ -133,6 +81,22 @@ document.querySelector('#search-btn').addEventListener('click', () => {
         }
         document.querySelector('#pagination').appendChild(pagination);
     })
+}
+    
 
-})
 
+        fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list').then((response) => {
+            let selectCatagory = response.json();
+            return selectCatagory
+        }).then((response) =>{
+                response.meals.forEach(c=>{
+                    let option = document.createElement("option");
+                    option.value = c.strCategory;
+                    option.append(c.strCategory);
+                    document.querySelector("#selectCategory").append(option)
+                })
+            
+            
+        })
+
+        fetch('')

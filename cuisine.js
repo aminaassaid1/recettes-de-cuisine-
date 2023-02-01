@@ -39,7 +39,8 @@ for (let i = 0; i < 6; i++) {
         button.appendChild(show);
         CardBody.append(CardTitle, button);
         card.append(CardBody);
-        document.querySelector('#cards').append(card)
+        document.querySelector('#cards').append(card);
+        
     })
 }
 
