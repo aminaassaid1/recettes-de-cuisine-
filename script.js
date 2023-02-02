@@ -99,4 +99,9 @@ for (let i = 0; i < 6; i++) {
             
         })
 
-        fetch('')
+        fetch('www.themealdb.com/api/json/v1/1/filter.php?a=Canadian').then((response)=>{
+            let selectArea = response.json();
+            console.log(selectArea)
+            return selectArea
+        })
+        
