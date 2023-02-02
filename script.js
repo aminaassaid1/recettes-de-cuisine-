@@ -79,12 +79,6 @@ for (let i = 0; i < 6; i++) {
             li.append(a);
             pagination.appendChild(li);
         }
-        document.querySelector('#pagination').appendChild(pagination);
-    })
-}
-    
-
-
         fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list').then((response) => {
             let selectCatagory = response.json();
             return selectCatagory
@@ -96,12 +90,28 @@ for (let i = 0; i < 6; i++) {
                     document.querySelector("#selectCategory").append(option)
                 })
             
-            
+                fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list').then((response)=>{
+                    let selectArea = response.json();
+                    console.log(selectArea)
+                    return selectArea
+                }).then((response)=>{
+                    response.meals.forEach(a=>{
+                        let optionArea = document.createElement("option");
+                        optionArea.value = a.strArea;
+                        console.log(a.strArea);
+                        optionArea.append(a.strArea);
+                        document.querySelector('#selectArea').append(optionArea)
+                    })
+                })
         })
+        document.querySelector('#pagination').appendChild(pagination);
+    })
+}
+    
 
-        fetch('www.themealdb.com/api/json/v1/1/filter.php?a=Canadian').then((response)=>{
-            let selectArea = response.json();
-            console.log(selectArea)
-            return selectArea
-        })
+
+
+
+
+
         
